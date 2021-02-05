@@ -28,17 +28,19 @@ def generateMeme(captions):
     if num_captions == 1:
         meme_format["bottom"] = captions[0]
     elif num_captions > 2:
-        meme_format["bottom"] = "I know how to make memes"
+        meme_format["bottom"] = "i KnOw HoW tO mAkE mEmEs"
     else:
         meme_format["top"] = captions[0]
         meme_format["bottom"] = captions[1]
 
-    img = Image.open("app/image.jpg")
-    for position, caption in meme_format.items():
+    img = Image.open("app/static/template.jpg")
+    for position, caption in list(meme_format.items()):
         addText(img, position, caption)
 
-    filename = Path("-".join(captions)+".jpg").resolve()
-    img.save(filename)
+    # Path("app/static/"+"-".join(captions)+".jpg").resolve()
+    filename = "-".join(captions)+".jpg"
+    filename = filename.replace(' ', '-')
+    img.save("app/static/"+filename)
     return filename
 
 
@@ -113,7 +115,6 @@ def addText(img, pos, msg):
 
         lastCut = nextCut
         lines.append(msg[cut:nextCut].strip())
-
 
     # 3. print each line centered
     lastY = -h
