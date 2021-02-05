@@ -1,15 +1,29 @@
+import sys
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
-import sys
-
-img = Image.open(sys.argv[1])
-draw = ImageDraw.Draw(img)
 
 
-def addText(msg, pos):
+def generateMeme(num_captions, captions):
+    meme_format = dict()
+    if num_captions == 1:
+        meme_format["bottom"] = captions[0]
+    else:
+        meme_format["top"] = captions[0]
+        meme_format["bottom"] = captions[1]
+
+    img = Image.open("app/image.jpg")
+    for position, caption in meme_format.items():
+        addText(img, position, caption)
+
+    filename = "-".join(captions)
+    img.save(f"{filename}.jpg")
+
+def addText(img, pos, msg):
     fontSize = 56
     lines = []
+
+    draw = ImageDraw.Draw(img)
 
     font = ImageFont.truetype("impact.ttf", fontSize)
     w, h = draw.textsize(msg, font)
@@ -102,7 +116,3 @@ def addText(msg, pos):
     return
 
 
-addText(sys.argv[2].upper(), "top")
-addText(sys.argv[3].upper(), "bottom")
-
-img.save(sys.argv[4])
