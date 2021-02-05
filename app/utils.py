@@ -19,6 +19,7 @@ def generateMeme(num_captions, captions):
     filename = "-".join(captions)
     img.save(f"{filename}.jpg")
 
+
 def addText(img, pos, msg):
     fontSize = 56
     lines = []
@@ -114,5 +115,3 @@ def addText(img, pos, msg):
         lastY = textY
 
     return
-
-
