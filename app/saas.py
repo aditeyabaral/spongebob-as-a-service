@@ -1,5 +1,5 @@
 import flask
-from utils import *
+from .utils import *
 from flask import Flask, request, render_template
 
 
