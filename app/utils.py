@@ -7,10 +7,8 @@ img = Image.open(sys.argv[1])
 draw = ImageDraw.Draw(img)
 
 
-
-
 def addText(msg, pos):
-    fontSize = 56;
+    fontSize = 56
     lines = []
 
     font = ImageFont.truetype("impact.ttf", fontSize)
@@ -33,16 +31,14 @@ def addText(msg, pos):
             if line_C < 3 or fontSize < 10:
                 break
 
-
     #print("img.width: {}, text width: {}".format(img.width, w))
     #print("Text length: {}".format(len(msg)))
     #print("Lines: {}".format(line_C))
 
-
     # 2. divide text in X lines
     lastCut = 0
     isLast = False
-    for i in range(0,line_C):
+    for i in range(0, line_C):
         if lastCut == 0:
             cut = (len(msg) / line_C) * i
         else:
@@ -53,7 +49,7 @@ def addText(msg, pos):
         else:
             nextCut = len(msg)
             isLast = True
-        
+
         cut = int(cut)
         nextCut = int(nextCut)
         #print("cut: {} -> {}".format(cut, nextCut))
@@ -88,23 +84,23 @@ def addText(msg, pos):
     if pos == "bottom":
         lastY = img.height - h * (line_C+1) - 10
 
-    for i in range(0,line_C):
+    for i in range(0, line_C):
         w, h = draw.textsize(lines[i], font)
         textX = img.width/2 - w/2
-        #if pos == "top":
+        # if pos == "top":
         #    textY = h * i
-        #else:
+        # else:
         #    textY = img.height - h * i
         textY = lastY + h
-        draw.text((textX-2, textY-2),lines[i],(0,0,0),font=font)
-        draw.text((textX+2, textY-2),lines[i],(0,0,0),font=font)
-        draw.text((textX+2, textY+2),lines[i],(0,0,0),font=font)
-        draw.text((textX-2, textY+2),lines[i],(0,0,0),font=font)
-        draw.text((textX, textY),lines[i],(255,255,255),font=font)
+        draw.text((textX-2, textY-2), lines[i], (0, 0, 0), font=font)
+        draw.text((textX+2, textY-2), lines[i], (0, 0, 0), font=font)
+        draw.text((textX+2, textY+2), lines[i], (0, 0, 0), font=font)
+        draw.text((textX-2, textY+2), lines[i], (0, 0, 0), font=font)
+        draw.text((textX, textY), lines[i], (255, 255, 255), font=font)
         lastY = textY
 
-
     return
+
 
 addText(sys.argv[2].upper(), "top")
 addText(sys.argv[3].upper(), "bottom")
