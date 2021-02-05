@@ -21,7 +21,7 @@ def meme(vargs):
     captions = vargs.split('/')
     num_captions = len(captions)
     if 1 <= num_captions <= 2:
-        utils.generateMeme(num_captions, captions)
+        utils.generateMeme(captions)
     else:
         errorMeme()
 
