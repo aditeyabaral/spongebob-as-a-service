@@ -1,32 +1,26 @@
 import flask
-import utils
+from .utils import *
 from flask import Flask, request, render_template
 
 
 app = Flask(__name__)
 
 
-def errorMeme():
-    return "", 200
-
-
 @app.route("/", methods=["GET"])
-def home():
+def home(*vargs):
     result = 'home page'
     return result, 200
 
 
 @app.route("/<path:vargs>", methods=["GET"])
 def meme(vargs):
+    print(vargs)
     captions = vargs.split('/')
-    num_captions = len(captions)
-    if 1 <= num_captions <= 2:
-        utils.generateMeme(captions)
-    else:
-        errorMeme()
-
-    result = "-".join(captions)
-    return result, 200
+    # captions = list(map(convertCaptionsCamelCase, captions))
+    print(f"Captions = {captions}")
+    filename = generateMeme(captions)
+    print(f"meme filename = {filename}")
+    return render_template("display.html", image=filename), 200
 
 
 if __name__ == "__main__":

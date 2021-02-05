@@ -1,13 +1,34 @@
-import sys
+import string
+from pathlib import Path
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
 
-def generateMeme(num_captions, captions):
+def convertCaptionsCamelCase(text):
+    text = text.lower()
+    new_text = str()
+    flag = False
+    for ch in text:
+        if ch in string.ascii_lowercase:
+            if flag:
+                new_text += ch.upper()
+                flag = False
+            else:
+                new_text += ch
+                flag = True
+        else:
+            new_text += ch
+    return new_text
+
+
+def generateMeme(captions):
+    num_captions = len(captions)
     meme_format = dict()
     if num_captions == 1:
         meme_format["bottom"] = captions[0]
+    elif num_captions > 2:
+        meme_format["bottom"] = "I know how to make memes"
     else:
         meme_format["top"] = captions[0]
         meme_format["bottom"] = captions[1]
@@ -16,8 +37,9 @@ def generateMeme(num_captions, captions):
     for position, caption in meme_format.items():
         addText(img, position, caption)
 
-    filename = "-".join(captions)
-    img.save(f"{filename}.jpg")
+    filename = Path("-".join(captions)+".jpg").resolve()
+    img.save(filename)
+    return filename
 
 
 def addText(img, pos, msg):
@@ -26,7 +48,7 @@ def addText(img, pos, msg):
 
     draw = ImageDraw.Draw(img)
 
-    font = ImageFont.truetype("impact.ttf", fontSize)
+    font = ImageFont.truetype("app/impact.ttf", fontSize)
     w, h = draw.textsize(msg, font)
 
     imgwithpadding = img.width * 0.99
@@ -92,7 +114,6 @@ def addText(img, pos, msg):
         lastCut = nextCut
         lines.append(msg[cut:nextCut].strip())
 
-    print(lines)
 
     # 3. print each line centered
     lastY = -h
@@ -113,5 +134,3 @@ def addText(img, pos, msg):
         draw.text((textX-2, textY+2), lines[i], (0, 0, 0), font=font)
         draw.text((textX, textY), lines[i], (255, 255, 255), font=font)
         lastY = textY
-
-    return
