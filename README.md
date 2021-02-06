@@ -8,17 +8,15 @@ Converting the SpongeBob Mocking Meme into a Service to redefine the meaning of 
 
 # How to use SaaS
 
-SaaS is pretty simple to use, and aims to be the simplest (and only) SpongeBob service that exists.
-
-The base url format is ```https://spongebob-service.herokuapp.com/``` and shall be referred to in these examples as simply `base`. 
+SaaS is pretty simple to use, and aims to be the simplest (and only) SpongeBob service that exists. The base URL is ```https://spongebob-service.herokuapp.com/```. Captions are passed as routes in the base URL.
 
 SaaS memes can be generated using the following URL request formats:
 
 * Bottom Caption: This will insert a caption at the bottom of the image. 
-    ```base/caption```
+    * Format: ```https://spongebob-service.herokuapp.com/bottom-caption```
 
 * Top and Bottom Captions: This will insert a caption at the top and bottom of the image.
-    ```base/top_caption/bottom_caption```
+    * Format: ```https://spongebob-service.herokuapp.com/top-caption/bottom-caption```
 
 
 You can even use SaaS in a script. Here is a simple example using Python.
