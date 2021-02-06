@@ -2,7 +2,7 @@
 
 Converting the SpongeBob Mocking Meme into a Service to redefine the meaning of SaaS.
 
-![meme-image](https://github.com/aditeyabaral/spongebob-as-a-service/app/static/readme-meme.jpg)
+!(https://github.com/aditeyabaral/spongebob-as-a-service/blob/main/app/static/readme-meme.jpg)
 
 # How to use SaaS
 
