@@ -10,17 +10,15 @@ Converting the SpongeBob Mocking Meme into a Service to redefine the meaning of 
 
 SaaS is pretty simple to use, and aims to be the simplest (and only) SpongeBob service that exists.
 
-The base url format is ```https://spongebob-service.herokuapp.com/``` and shall be referred to as simply `base`. 
+The base url format is ```https://spongebob-service.herokuapp.com/``` and shall be referred to in these examples as simply `base`. 
 
-SaaS memes can be generated using the following URL requests:
+SaaS memes can be generated using the following URL request formats:
 
-* Bottom Caption: This will insert a caption at the bottom.
+* Bottom Caption: This will insert a caption at the bottom of the image. 
+    ```base/caption```
 
-```base/caption```
-
-* Top and Bottom Captions: This will insert a caption at the top.
-
-```base/top_caption/bottom_caption```
+* Top and Bottom Captions: This will insert a caption at the top and bottom of the image.
+    ```base/top_caption/bottom_caption```
 
 
 You can even use SaaS in a script. Here is a simple example using Python.
@@ -49,7 +47,7 @@ Support for specifying caption positions coming soon.
 
 # Inspiration to convert the SpongeBob Mocking Meme into a Service
 
-My dear friend Ryan (name changed) scoffed and said that I cannot make a service out of everything I see. After hearing such a preposterous claim (and the critically acclaimed asuccess of my [AaaS](https://github.com/aditeyabaral/arithmetic-as-a-service)), I just had to prove him wrong. Guess who is is laughing now, Ryan.
+My dear friend Ryan (name changed) scoffed and said that I cannot make a service out of everything I see. After hearing such a preposterous claim (and the critically acclaimed success of my [AaaS](https://github.com/aditeyabaral/arithmetic-as-a-service)), I just had to prove him wrong. Guess who is is laughing now, Ryan.
 
 # Contributing to SaaS
 
