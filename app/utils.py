@@ -44,13 +44,12 @@ def generateMeme(captions):
     return filename
 
 
-def addText(img, pos, msg):
-    fontSize = 56
+def addText(img,msg, pos):
+    draw = ImageDraw.Draw(img)
+    fontSize = 56;
     lines = []
 
-    draw = ImageDraw.Draw(img)
-
-    font = ImageFont.truetype("app/impact.ttf", fontSize)
+    font = ImageFont.truetype("impact.ttf", fontSize)
     w, h = draw.textsize(msg, font)
 
     imgwithpadding = img.width * 0.99
@@ -70,14 +69,16 @@ def addText(img, pos, msg):
             if line_C < 3 or fontSize < 10:
                 break
 
+
     #print("img.width: {}, text width: {}".format(img.width, w))
     #print("Text length: {}".format(len(msg)))
     #print("Lines: {}".format(line_C))
 
+
     # 2. divide text in X lines
     lastCut = 0
     isLast = False
-    for i in range(0, line_C):
+    for i in range(0,line_C):
         if lastCut == 0:
             cut = (len(msg) / line_C) * i
         else:
@@ -88,7 +89,7 @@ def addText(img, pos, msg):
         else:
             nextCut = len(msg)
             isLast = True
-
+        
         cut = int(cut)
         nextCut = int(nextCut)
         #print("cut: {} -> {}".format(cut, nextCut))
@@ -116,22 +117,27 @@ def addText(img, pos, msg):
         lastCut = nextCut
         lines.append(msg[cut:nextCut].strip())
 
+    print(lines)
+
     # 3. print each line centered
     lastY = -h
     if pos == "bottom":
         lastY = img.height - h * (line_C+1) - 10
 
-    for i in range(0, line_C):
+    for i in range(0,line_C):
         w, h = draw.textsize(lines[i], font)
         textX = img.width/2 - w/2
-        # if pos == "top":
+        #if pos == "top":
         #    textY = h * i
-        # else:
+        #else:
         #    textY = img.height - h * i
         textY = lastY + h
-        draw.text((textX-2, textY-2), lines[i], (0, 0, 0), font=font)
-        draw.text((textX+2, textY-2), lines[i], (0, 0, 0), font=font)
-        draw.text((textX+2, textY+2), lines[i], (0, 0, 0), font=font)
-        draw.text((textX-2, textY+2), lines[i], (0, 0, 0), font=font)
-        draw.text((textX, textY), lines[i], (255, 255, 255), font=font)
+        draw.text((textX-2, textY-2),lines[i],(0,0,0),font=font)
+        draw.text((textX+2, textY-2),lines[i],(0,0,0),font=font)
+        draw.text((textX+2, textY+2),lines[i],(0,0,0),font=font)
+        draw.text((textX-2, textY+2),lines[i],(0,0,0),font=font)
+        draw.text((textX, textY),lines[i],(255,255,255),font=font)
         lastY = textY
+
+
+    return
