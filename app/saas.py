@@ -12,7 +12,7 @@ app = Flask(
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    captions = ["SpongeBob cannot", "be a Service"]
+    captions = ["sPoNgEbOb CaNnOt", "Be A sErViCe"]
     filename = generateMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
