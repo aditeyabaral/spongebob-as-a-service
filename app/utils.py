@@ -34,13 +34,10 @@ def generateMeme(captions):
         meme_format["top"] = captions[0]
         meme_format["bottom"] = captions[1]
 
-    print(os.getcwd())
-
     img = Image.open("app/static/template.jpg")
     for position, caption in list(meme_format.items()):
         addText(img, position, caption)
 
-    # Path("app/static/"+"-".join(captions)+".jpg").resolve()
     filename = "-".join(captions)+".jpg"
     filename = filename.replace(' ', '-')
     img.save("app/static/"+filename)

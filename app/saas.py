@@ -4,10 +4,10 @@ from flask import Flask, request, render_template
 
 
 app = Flask(
-    __name__, 
+    __name__,
     static_folder="static",
     template_folder="templates"
-    )
+)
 
 
 @app.route("/", methods=["GET"])
@@ -20,9 +20,8 @@ def home(*vargs):
 @app.route("/<path:vargs>", methods=["GET"])
 def meme(vargs):
     captions = vargs.split('/')
-    # captions = list(map(convertCaptionsCamelCase, captions))
+    # captions = list(map(convertCaptionsCamelCase, captions))  # do we need this function? let user handle it
     filename = generateMeme(captions)
-    print(f"filename = {filename}")
     return render_template("display.html", meme_image=filename), 200
 
 
