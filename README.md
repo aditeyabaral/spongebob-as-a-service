@@ -1,4 +1,4 @@
-# spongebob-as-a-service
+# SpongeBob-as-a-Service
 
 Converting the SpongeBob Mocking Meme into a Service to redefine the meaning of SaaS.
 
@@ -49,7 +49,7 @@ Support for specifying caption positions coming soon.
 
 # Inspiration to convert the SpongeBob Mocking Meme into a Service
 
-My dear friend Ryan (name changed) scoffed and said that I cannot make a service out of everything I see. After hearing such a preposterous claim, (and the critically acclaimed asuccess of my [AaaS](https://github.com/aditeyabaral/arithmetic-as-a-service)) I just had to prove him wrong. Guess who is is laughing now, Ryan.
+My dear friend Ryan (name changed) scoffed and said that I cannot make a service out of everything I see. After hearing such a preposterous claim (and the critically acclaimed asuccess of my [AaaS](https://github.com/aditeyabaral/arithmetic-as-a-service)), I just had to prove him wrong. Guess who is is laughing now, Ryan.
 
 # Contributing to SaaS
 
