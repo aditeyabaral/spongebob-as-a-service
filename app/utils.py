@@ -1,3 +1,4 @@
+import os
 import string
 from pathlib import Path
 from PIL import Image
@@ -32,6 +33,8 @@ def generateMeme(captions):
     else:
         meme_format["top"] = captions[0]
         meme_format["bottom"] = captions[1]
+
+    print(os.getcwd())
 
     img = Image.open("app/static/template.jpg")
     for position, caption in list(meme_format.items()):
