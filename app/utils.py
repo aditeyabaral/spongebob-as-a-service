@@ -26,7 +26,7 @@ def convertCaptionsCamelCase(captions):
     new_captions = list()
     pos = 0
     for _, ctr in enumerate(n_words):
-        new_captions.append(new_text[pos:pos+ctr])
+        new_captions.append(" ".join(new_text[pos: pos + ctr]))
         pos += ctr
     return new_captions
 
