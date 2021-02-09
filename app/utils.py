@@ -6,8 +6,9 @@ from PIL import ImageFont
 from PIL import ImageDraw
 
 
-def convertCaptionsCamelCase(text):
-    text = text.lower()
+def convertCaptionsCamelCase(captions):
+    n_words = [len(caption.split()) for caption in captions]
+    text = " ".join(captions).lower()
     new_text = str()
     flag = False
     for ch in text:
@@ -20,7 +21,14 @@ def convertCaptionsCamelCase(text):
                 flag = True
         else:
             new_text += ch
-    return new_text
+
+    new_text = new_text.split()
+    new_captions = list()
+    pos = 0
+    for _, ctr in enumerate(n_words):
+        new_captions.append(new_text[pos:pos+ctr])
+        pos += ctr
+    return new_captions
 
 
 def generateMeme(captions):
