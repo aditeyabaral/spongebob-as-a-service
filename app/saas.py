@@ -1,5 +1,5 @@
 import flask
-from utils import *
+from .utils import *
 from flask import Flask, request, render_template
 
 
@@ -20,7 +20,8 @@ def home(*vargs):
 @app.route("/<path:vargs>", methods=["GET"])
 def meme(vargs):
     captions = vargs.split('/')
-    captions = convertCaptionsCamelCase(captions) # do we need this function? let user handle it
+    # do we need this function? let user handle it
+    captions = convertCaptionsCamelCase(captions)
     filename = generateMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
