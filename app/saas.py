@@ -20,8 +20,9 @@ def home(*vargs):
 @app.route("/<path:vargs>", methods=["GET"])
 def meme(vargs):
     captions = vargs.split('/')
-    # do we need this function? let user handle it
+    print(captions)
     captions = convertCaptionsCamelCase(captions)
+    print(captions)
     filename = generateMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
