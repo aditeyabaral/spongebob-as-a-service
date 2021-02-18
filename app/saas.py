@@ -1,6 +1,6 @@
-import flask
+# import flask
 from .utils import *
-from flask import Flask, request, render_template
+from flask import Flask, render_template
 
 
 app = Flask(
@@ -12,18 +12,15 @@ app = Flask(
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    captions = ["sPoNgEbOb CaNnOt", "Be A sErViCe"]
-    filename = generateMeme(captions)
+    captions = ["spongebob cannot", "be a service"]
+    filename = createMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
 
 @app.route("/<path:vargs>", methods=["GET"])
 def meme(vargs):
     captions = vargs.split('/')
-    print(captions)
-    captions = convertCaptionsCamelCase(captions)
-    print(captions)
-    filename = generateMeme(captions)
+    filename = createMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
 

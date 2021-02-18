@@ -1,9 +1,15 @@
-import os
+# import os
 import string
-from pathlib import Path
+# from pathlib import Path
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+
+
+def createMeme(captions):
+    captions = convertCaptionsCamelCase(captions)
+    filename = generateImage(captions)
+    return filename
 
 
 def convertCaptionsCamelCase(captions):
@@ -31,7 +37,7 @@ def convertCaptionsCamelCase(captions):
     return new_captions
 
 
-def generateMeme(captions):
+def generateImage(captions):
     num_captions = len(captions)
     meme_format = dict()
     if num_captions == 1:
