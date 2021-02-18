@@ -1,6 +1,5 @@
-# import os
+import random
 import string
-# from pathlib import Path
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -9,6 +8,19 @@ from PIL import ImageDraw
 def createMeme(captions):
     captions = convertCaptionsCamelCase(captions)
     filename = generateImage(captions)
+    return filename
+
+
+def handleErrorMeme():
+    caption_choices = [
+        ["i know how to", "make memes"],
+        ["i can make memes bro"],
+        ["i am a professional", "meme maker"],
+        ["my meme game", "is strong"],
+        ["i know how to", "use saas"]
+    ]
+    captions = random.choice(caption_choices)
+    filename = createMeme(captions)
     return filename
 
 
@@ -40,13 +52,15 @@ def convertCaptionsCamelCase(captions):
 def generateImage(captions):
     num_captions = len(captions)
     meme_format = dict()
+
     if num_captions == 1:
         meme_format["bottom"] = captions[0]
-    elif num_captions > 2:
-        meme_format["bottom"] = "i KnOw HoW tO mAkE mEmEs"
-    else:
+    elif num_captions == 2:
         meme_format["top"] = captions[0]
         meme_format["bottom"] = captions[1]
+    else:
+        filename = handleErrorMeme()
+        return filename
 
     img = Image.open("app/static/template.jpg")
     for position, caption in list(meme_format.items()):
