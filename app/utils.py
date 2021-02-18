@@ -7,7 +7,11 @@ from PIL import ImageDraw
 
 def createMeme(captions):
     captions = convertCaptionsCamelCase(captions)
-    filename = generateImage(captions)
+    try:
+        filename = generateImage(captions)
+    except ValueError as e:
+        print(f"Bad request: {str(e)}")
+        filename = handleErrorMeme()
     return filename
 
 
@@ -59,8 +63,7 @@ def generateImage(captions):
         meme_format["top"] = captions[0]
         meme_format["bottom"] = captions[1]
     else:
-        filename = handleErrorMeme()
-        return filename
+        raise ValueError("Incorrect number of captions")
 
     img = Image.open("app/static/template.jpg")
     for position, caption in list(meme_format.items()):

@@ -1,4 +1,4 @@
-from utils import *
+from .utils import *
 from flask import Flask, render_template
 
 
@@ -7,6 +7,7 @@ app = Flask(
     static_folder="static",
     template_folder="templates"
 )
+
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
