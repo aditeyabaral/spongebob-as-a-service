@@ -18,7 +18,7 @@ def home(*vargs):
 
 @app.route("/createMeme", methods=["GET"])
 def meme():
-    captions = request.args.get()
+    captions = request.args.get('caption')
     captions = vargs.split('/')
     filename = createMeme(captions)
     return render_template("display.html", meme_image=filename), 200
