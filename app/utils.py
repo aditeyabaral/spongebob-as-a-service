@@ -1,8 +1,6 @@
 import random
 import string
-from PIL import Image
-from PIL import ImageFont
-from PIL import ImageDraw
+from PIL import Image, ImageFont, ImageDraw
 
 
 def createMeme(captions):
@@ -87,28 +85,21 @@ def addText(img, pos, msg):
 
     imgwithpadding = img.width * 0.99
 
-    # 1. how many lines for the msg to fit ?
     line_C = 1
     if(w > imgwithpadding):
         line_C = int(round((w / imgwithpadding) + 1))
 
     if line_C > 2:
-        while 1:
+        while True:
             fontSize -= 2
             fnopen = open("app/impact.ttf", "rb")
             font = ImageFont.truetype(fnopen, fontSize)
             w, h = draw.textsize(msg, font)
             line_C = int(round((w / imgwithpadding) + 1))
             fnopen.close()
-            #print("try again with fontSize={} => {}".format(fontSize, line_C))
             if line_C < 3 or fontSize < 10:
                 break
 
-    #print("img.width: {}, text width: {}".format(img.width, w))
-    #print("Text length: {}".format(len(msg)))
-    #print("Lines: {}".format(line_C))
-
-    # 2. divide text in X lines
     lastCut = 0
     isLast = False
     for i in range(0, line_C):
@@ -125,9 +116,7 @@ def addText(img, pos, msg):
 
         cut = int(cut)
         nextCut = int(nextCut)
-        #print("cut: {} -> {}".format(cut, nextCut))
 
-        # make sure we don't cut words in half
         if nextCut == len(msg) or msg[nextCut] == " ":
             print("may cut")
         else:
@@ -138,7 +127,6 @@ def addText(img, pos, msg):
 
         line = msg[cut:nextCut].strip()
 
-        # is line still fitting ?
         w, h = draw.textsize(line, font)
         if not isLast and w > imgwithpadding:
             print("overshot")
@@ -150,7 +138,6 @@ def addText(img, pos, msg):
         lastCut = nextCut
         lines.append(msg[cut:nextCut].strip())
 
-    # 3. print each line centered
     lastY = -h
     if pos == "bottom":
         lastY = img.height - h * (line_C+1) - 10
@@ -158,10 +145,6 @@ def addText(img, pos, msg):
     for i in range(0, line_C):
         w, h = draw.textsize(lines[i], font)
         textX = img.width/2 - w/2
-        # if pos == "top":
-        #    textY = h * i
-        # else:
-        #    textY = img.height - h * i
         textY = lastY + h
         draw.text((textX-2, textY-2), lines[i], (0, 0, 0), font=font)
         draw.text((textX+2, textY-2), lines[i], (0, 0, 0), font=font)
@@ -169,4 +152,3 @@ def addText(img, pos, msg):
         draw.text((textX-2, textY+2), lines[i], (0, 0, 0), font=font)
         draw.text((textX, textY), lines[i], (255, 255, 255), font=font)
         lastY = textY
-    # fnopen.close()
