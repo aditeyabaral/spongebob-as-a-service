@@ -72,6 +72,7 @@ def generateImage(captions):
     filename = "-".join(captions)+".jpg"
     filename = filename.replace(' ', '-')
     img.save("app/static/"+filename)
+    img.close()
     return filename
 
 
