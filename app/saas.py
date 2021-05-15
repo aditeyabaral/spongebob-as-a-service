@@ -1,5 +1,5 @@
-from .utils import *
-from flask import Flask, render_template
+from utils import *
+from flask import Flask, render_template, request
 
 
 app = Flask(
@@ -16,8 +16,9 @@ def home(*vargs):
     return render_template("display.html", meme_image=filename), 200
 
 
-@app.route("/<path:vargs>", methods=["GET"])
-def meme(vargs):
+@app.route("/createMeme", methods=["GET"])
+def meme():
+    captions = request.args.get()
     captions = vargs.split('/')
     filename = createMeme(captions)
     return render_template("display.html", meme_image=filename), 200
