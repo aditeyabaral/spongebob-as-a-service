@@ -72,6 +72,7 @@ def generateImage(captions):
     filename = "-".join(captions)+".jpg"
     filename = filename.replace(' ', '-')
     img.save("app/static/"+filename)
+    img.close()
     return filename
 
 
@@ -94,9 +95,11 @@ def addText(img, pos, msg):
     if line_C > 2:
         while 1:
             fontSize -= 2
-            font = ImageFont.truetype("impact.ttf", fontSize)
+            fnopen = open("app/impact.ttf", "rb")
+            font = ImageFont.truetype(fnopen, fontSize)
             w, h = draw.textsize(msg, font)
             line_C = int(round((w / imgwithpadding) + 1))
+            fnopen.close()
             #print("try again with fontSize={} => {}".format(fontSize, line_C))
             if line_C < 3 or fontSize < 10:
                 break
@@ -166,3 +169,4 @@ def addText(img, pos, msg):
         draw.text((textX-2, textY+2), lines[i], (0, 0, 0), font=font)
         draw.text((textX, textY), lines[i], (255, 255, 255), font=font)
         lastY = textY
+    # fnopen.close()
