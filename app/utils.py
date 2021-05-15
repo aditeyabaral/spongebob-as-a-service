@@ -95,7 +95,7 @@ def addText(img, pos, msg):
     if line_C > 2:
         while 1:
             fontSize -= 2
-            fnopen = open("impact.ttf", "rb")
+            fnopen = open("app/app/impact.ttf", "rb")
             font = ImageFont.truetype(fnopen, fontSize)
             w, h = draw.textsize(msg, font)
             line_C = int(round((w / imgwithpadding) + 1))
