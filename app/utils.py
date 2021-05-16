@@ -62,14 +62,6 @@ def generateImage(captions):
     num_captions = len(captions)
     meme_format = dict()
 
-    '''if captions['top'] is None:
-        meme_format["bottom"] = captions[0]
-    elif num_captions == 2:
-        meme_format["top"] = captions[0]
-        meme_format["bottom"] = captions[1]
-    else:
-        raise ValueError("Incorrect number of captions")'''
-
     img = Image.open("app/static/template.jpg")
     for position, caption in list(captions.items()):
         addText(img, position, caption)
