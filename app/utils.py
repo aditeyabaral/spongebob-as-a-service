@@ -151,7 +151,3 @@ def addText(img, pos, msg):
         draw.text((textX-2, textY+2), lines[i], (0, 0, 0), font=font)
         draw.text((textX, textY), lines[i], (255, 255, 255), font=font)
         lastY = textY
-
-
-#generateImage({'top': 'test', 'bottom': 'test'})
-#print(convertCaptionsCamelCase(['test', 'test']))

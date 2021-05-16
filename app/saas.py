@@ -27,9 +27,9 @@ def meme():
     if(top is None):
         top = ''
     data = {'top': top, 'bottom': bottom}
-    print(data)
+
     filename = createMeme(data)
-    print(filename)
+
     return render_template("display.html", meme_image=filename), 200
 
 
