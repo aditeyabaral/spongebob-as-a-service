@@ -7,6 +7,7 @@ app = Flask(
     static_folder="static",
     template_folder="templates"
 )
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
 @app.route("/", methods=["GET"])
