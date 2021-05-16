@@ -18,12 +18,17 @@ def home(*vargs):
 
 @app.route("/q", methods=["GET"])
 def meme():
+
     top = request.args.get('top')
     bottom = request.args.get('bottom')
-    captions = []
-    captions.append(top)
-    captions.append(bottom)
-    filename = createMeme(captions)
+    if(bottom is None):
+        bottom = ''
+    if(top is None):
+        top = ''
+    data = {'top': top, 'bottom': bottom}
+    print(data)
+    filename = createMeme(data)
+    print(filename)
     return render_template("display.html", meme_image=filename), 200
 
 
