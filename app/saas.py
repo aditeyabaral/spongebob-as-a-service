@@ -1,4 +1,4 @@
-from .utils import *
+from .utils import createMeme
 from flask import Flask, render_template, request
 
 
@@ -12,24 +12,42 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route("/", methods=["GET"])
 def home(*vargs):
-    captions = ["spongebob cannot", "be a service"]
+    captions = {
+        "top": "spongebob cannot",
+        "bottom": "be a service"
+    }
+    filename = createMeme(captions)
+    return render_template("display.html", meme_image=filename), 200
+
+
+@app.route("/<path:vargs>", methods=["GET"])
+def meme(vargs):
+    captions = vargs.split('/')
+    if len(captions) == 2:
+        captions = {
+            "top": captions[0],
+            "bottom": captions[1]
+        }
+    else:
+        captions = {
+            "top": "",
+            "bottom": captions[0]
+        }
+
     filename = createMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
 
 @app.route("/q", methods=["GET"])
-def meme():
+def memeParameters():
 
-    top = request.args.get('top')
-    bottom = request.args.get('bottom')
-    if(bottom is None):
-        bottom = ''
-    if(top is None):
-        top = ''
-    data = {'top': top, 'bottom': bottom}
-
-    filename = createMeme(data)
-
+    top = request.args.get('top', default="")
+    bottom = request.args.get('bottom', default="")
+    captions = {
+        'top': top,
+        'bottom': bottom
+    }
+    filename = createMeme(captions)
     return render_template("display.html", meme_image=filename), 200
 
 

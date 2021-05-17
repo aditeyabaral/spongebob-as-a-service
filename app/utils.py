@@ -29,8 +29,8 @@ def handleErrorMeme():
     return filename
 
 
-def convertCaptionsCamelCase(dictc):
-    captions = dictc.values()
+def convertCaptionsCamelCase(captions):
+    captions = captions.values()
     n_words = [len(caption.split()) for caption in captions]
     text = " ".join(captions).lower()
     new_text = str()
@@ -52,20 +52,19 @@ def convertCaptionsCamelCase(dictc):
     for _, ctr in enumerate(n_words):
         new_captions.append(" ".join(new_text[pos: pos + ctr]))
         pos += ctr
-    r_dict = dict()
-    r_dict['top'] = new_captions[0]
-    r_dict['bottom'] = new_captions[1]
-    return r_dict
+
+    new_captions_dict = dict()
+    new_captions_dict['top'] = new_captions[0]
+    new_captions_dict['bottom'] = new_captions[1]
+    return new_captions_dict
 
 
 def generateImage(captions):
-    num_captions = len(captions)
-    meme_format = dict()
-
     img = Image.open("app/static/template.jpg")
     for position, caption in list(captions.items()):
         addText(img, position, caption)
 
+    captions = [c for c in captions.values() if c.strip() != ""]
     filename = "-".join(captions)+".jpg"
     filename = filename.replace(' ', '-')
     img.save("app/static/"+filename)
@@ -117,22 +116,18 @@ def addText(img, pos, msg):
         nextCut = int(nextCut)
 
         if nextCut == len(msg) or msg[nextCut] == " ":
-            print("may cut")
+            pass
         else:
-            print("may not cut")
             while msg[nextCut] != " ":
                 nextCut += 1
-            print("new cut: {}".format(nextCut))
 
         line = msg[cut:nextCut].strip()
 
         w, h = draw.textsize(line, font)
         if not isLast and w > imgwithpadding:
-            print("overshot")
             nextCut -= 1
             while msg[nextCut] != " ":
                 nextCut -= 1
-            print("new cut: {}".format(nextCut))
 
         lastCut = nextCut
         lines.append(msg[cut:nextCut].strip())
