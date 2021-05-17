@@ -8,17 +8,31 @@ Converting the SpongeBob Mocking Meme into a Service to redefine the meaning of 
 
 # How to use SaaS
 
-SaaS is pretty simple to use, and aims to be the simplest (and only) SpongeBob service that exists. The base URL is ```https://spongebob-service.herokuapp.com/```. Captions are passed as routes in the base URL.
+SaaS is pretty simple to use, and aims to be the simplest (and only) SpongeBob service that exists. The base URL is ```https://spongebob-service.herokuapp.com/```. Captions can be passed in two ways.
 
-SaaS memes can be generated using the following URL request formats:
+## SaaS using Routes
+
+SaaS memes can be generated using the following URL route formats:
 
 * Bottom Caption: This will insert a caption at the bottom of the image. 
-    * Format: ```https://spongebob-service.herokuapp.com/bottom-caption```
+    * Format: ```https://spongebob-service.herokuapp.com/<bottom caption>```
 
 * Top and Bottom Captions: This will insert a caption at the top and bottom of the image.
-    * Format: ```https://spongebob-service.herokuapp.com/top-caption/bottom-caption```
+    * Format: ```https://spongebob-service.herokuapp.com/<top caption>/<bottom caption>```
 
+## SaaS using Parameters
 
+SaaS memes can also be generated using parameters passed in the URL. This method although slower, provides greater flexibility in setting the image positions.
+
+You can choose to have both captions, or either one caption.
+
+* Both captions: ```https://spongebob-service.herokuapp.com/q?top=<top caption>&bottom=<bottom caption>```
+
+* Top or Bottom caption: 
+  * Top caption: ```https://spongebob-service.herokuapp.com/q?top=<top caption>```
+  * Bottom caption: ```https://spongebob-service.herokuapp.com/q?bottom=<bottom caption>```
+
+## SaaS in a Script
 You can even use SaaS in a script. Here is a simple example using Python.
 
 ```Python
@@ -40,8 +54,6 @@ You can even use SaaS in a script. Here is a simple example using Python.
 >>> with open("meme.jpg", 'wb') as outfile:
 >>>     outfile.write(response.content)
 ```
-
-Support for specifying caption positions coming soon.
 
 # Inspiration to convert the SpongeBob Mocking Meme into a Service
 
