@@ -14,10 +14,10 @@ SaaS is pretty simple to use, and aims to be the simplest (and only) SpongeBob s
 
 SaaS memes can be generated using the following URL route formats:
 
-* Bottom Caption: This will insert a caption at the bottom of the image. 
+* **Bottom caption**: This will insert a caption at the bottom of the image. 
     * Format: ```https://spongebob-service.herokuapp.com/<bottom caption>```
 
-* Top and Bottom Captions: This will insert a caption at the top and bottom of the image.
+* **Top and Bottom captions**: This will insert a caption at the top and bottom of the image.
     * Format: ```https://spongebob-service.herokuapp.com/<top caption>/<bottom caption>```
 
 ## SaaS using Parameters
@@ -26,11 +26,11 @@ SaaS memes can also be generated using parameters passed in the URL. This method
 
 You can choose to have both captions, or either one caption.
 
-* Both captions: ```https://spongebob-service.herokuapp.com/q?top=<top caption>&bottom=<bottom caption>```
+* **Both captions**: ```https://spongebob-service.herokuapp.com/q?top=<top caption>&bottom=<bottom caption>```
 
-* Top or Bottom caption: 
+* **Top or Bottom caption**: 
   * Top caption: ```https://spongebob-service.herokuapp.com/q?top=<top caption>```
-  * Bottom caption: ```https://spongebob-service.herokuapp.com/q?bottom=<bottom caption>```
+  * **Bottom caption**: ```https://spongebob-service.herokuapp.com/q?bottom=<bottom caption>```
 
 ## SaaS in a Script
 You can even use SaaS in a script. Here is a simple example using Python.
