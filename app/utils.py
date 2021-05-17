@@ -6,27 +6,31 @@ from PIL import Image, ImageFont, ImageDraw
 def createMeme(captions):
     captions = convertCaptionsCamelCase(captions)
     try:
+        if(captions['top'] == captions['bottom'] == ''):
+            raise ValueError
         filename = generateImage(captions)
     except ValueError as e:
         print(f"Bad request: {str(e)}")
         filename = handleErrorMeme()
+
     return filename
 
 
 def handleErrorMeme():
     caption_choices = [
-        ["i know how to", "make memes"],
-        ["i can make memes bro"],
-        ["i am a professional", "meme maker"],
-        ["my meme game", "is strong"],
-        ["i know how to", "use saas"]
+        {'top': "i know how to", 'bottom': "make memes"},
+        {'top': '', 'bottom': "i can make memes bro"},
+        {'top': "i am a professional", 'bottom': "meme maker"},
+        {'top': "my meme game", 'bottom': "is strong"},
+        {'top': "i know how to", 'bottom': "use saas"}
     ]
     captions = random.choice(caption_choices)
     filename = createMeme(captions)
     return filename
 
 
-def convertCaptionsCamelCase(captions):
+def convertCaptionsCamelCase(dictc):
+    captions = dictc.values()
     n_words = [len(caption.split()) for caption in captions]
     text = " ".join(captions).lower()
     new_text = str()
@@ -48,23 +52,18 @@ def convertCaptionsCamelCase(captions):
     for _, ctr in enumerate(n_words):
         new_captions.append(" ".join(new_text[pos: pos + ctr]))
         pos += ctr
-    return new_captions
+    r_dict = dict()
+    r_dict['top'] = new_captions[0]
+    r_dict['bottom'] = new_captions[1]
+    return r_dict
 
 
 def generateImage(captions):
     num_captions = len(captions)
     meme_format = dict()
 
-    if num_captions == 1:
-        meme_format["bottom"] = captions[0]
-    elif num_captions == 2:
-        meme_format["top"] = captions[0]
-        meme_format["bottom"] = captions[1]
-    else:
-        raise ValueError("Incorrect number of captions")
-
     img = Image.open("app/static/template.jpg")
-    for position, caption in list(meme_format.items()):
+    for position, caption in list(captions.items()):
         addText(img, position, caption)
 
     filename = "-".join(captions)+".jpg"
